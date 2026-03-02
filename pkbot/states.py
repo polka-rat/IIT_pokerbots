@@ -133,6 +133,8 @@ class PokerState:
     opp_chips: int
     my_wager: int
     opp_wager: int
+    my_bid: int
+    opp_bid: int
     pot: int
     cost_to_call: int
     is_bb: bool
@@ -154,6 +156,8 @@ class PokerState:
         self.opp_chips = current_state.chips[1-active]
         self.my_wager = current_state.wagers[active]
         self.opp_wager = current_state.wagers[1-active]
+        self.my_bid = current_state.bids[active] if current_state.bids[active] is not None else 0
+        self.opp_bid = current_state.bids[1-active] if current_state.bids[1-active] is not None else 0
         
         self.pot = (STARTING_STACK - self.my_chips) + (STARTING_STACK - self.opp_chips)
         self.cost_to_call = self.opp_wager - self.my_wager
